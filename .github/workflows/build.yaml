@@ -1,0 +1,26 @@
+name: Build NET_PROFILER_HIJACKING
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch if it's different
+  pull_request:
+    branches:
+      - main  # Change this to your default branch if it's different
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Visual Studio
+      uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-version: 'latest'  # You can specify a version like '16.0' for Visual Studio 2019
+
+    - name: Build solution
+      run: |
+        msbuild MultipleFiles/NET_PROFILER_HIJACKING.sln /p:Configuration=Release
